@@ -24,7 +24,15 @@ const addNewUser = function insertNewUser () {
   // FILL ME IN
 };
 
+const getAllUsers = function retrieveAllUsers() {
+  // FILL ME IN
+};
+
 const addNewReview = function insertNewReview () {
+  // FILL ME IN
+};
+
+const getAllReviews = function retrieveAllReviews() {
   // FILL ME IN
 };
 
@@ -32,14 +40,6 @@ const addNewItem = function insertNewItem () {
   // FILL ME IN
 };
 
-const getAllReviews = function retrieveAllReviews() {
-  // FILL ME IN
-};
-
-const getAllReviews = function retrieveAllReviews() {
-  // FILL ME IN
-};
-
-const getAllReviews = function retrieveAllReviews() {
+const getAllItems = function retrieveAllItems() {
   // FILL ME IN
 };
