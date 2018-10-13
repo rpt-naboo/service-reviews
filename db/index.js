@@ -1,8 +1,15 @@
-import Sequelize from 'sequelize';
-import dotenv from 'dotenv';
+var Sequelize = require('sequelize');
+require('dotenv').config();
+//import Sequelize from 'sequelize';
+//import dotenv from 'dotenv';
 
-dotenv.config();
-const db = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASSWORD);
+//dotenv.config();
+const db = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  dialect: 'mysql',
+  operatorsAliases: false,
+});
 
 const User = db.define('User', {
   username: Sequelize.STRING(20),
@@ -19,6 +26,10 @@ const Review = db.define('Review', {
 
 Review.belongsTo(User);
 Review.belongsTo(Item);
+
+User.sync();
+Item.sync();
+Review.sync();
 
 const addNewUser = function insertNewUser () {
   // FILL ME IN
