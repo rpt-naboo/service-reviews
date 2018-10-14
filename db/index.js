@@ -24,8 +24,9 @@ const Review = db.define('Review', {
   text: Sequelize.TEXT,
 });
 
-Review.belongsTo(User);
-Review.belongsTo(Item);
+Review.belongsTo(User, {foreignKey: 'user_id'});
+Review.belongsTo(Item, {foreignKey: 'item_id'});
+Item.hasMany(Review, {foreignKey: 'item_id'});
 
 User.sync();
 Item.sync();
