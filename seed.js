@@ -1,5 +1,5 @@
 const faker = require('faker');
-// require db helpers
+const db = require('./db');
 
 const usernames = [];
 const items = [];
@@ -42,8 +42,38 @@ const generateReviews = function generateNRandomReviews (n) {
   }
 };
 
+const saveUsers = function saveAllGeneratedUsers () {
+  return new Promise.all(users.map(function(user) {
+    return db.addNewUser(user);
+  }));
+};
+
+const saveItems = function saveAllGeneratedItems () {
+  return new Promise.all(items.map(function(item) {
+    return db.addNewItem(item);
+  }));
+};
+
+const saveReviews = function saveAllGeneratedReviews () {
+  return new Promise.all(reviews.map(function(review) {
+    return db.addNewReview(review);
+  }));
+};
+
 generateUsers(10);
 generateItems(10);
 generateReviews(100);
 
-// FILL ME IN
+saveUsers()
+.then(function() {
+  return saveItems();
+})
+.then(function() {
+  return saveReviews();
+})
+.then(function() {
+  // close db
+})
+.catch(function() {
+  return console.error(error);
+});
