@@ -1,5 +1,7 @@
 const faker = require('faker');
-const db = require('./db');
+const Users = require('./db/controllers/Users.js');
+const Items = require('./db/controllers/Items.js');
+const Reviews = require('./db/controllers/Reviews.js');
 
 const usernames = [];
 const items = [];
@@ -43,20 +45,20 @@ const generateReviews = function generateNRandomReviews (n) {
 };
 
 const saveUsers = function saveAllGeneratedUsers () {
-  return new Promise.all(usernames.map(function(name) {
-    return db.addNewUser({username: name});
+  return Promise.all(usernames.map(function(name) {
+    return Users.addNewUser({username: name});
   }));
 };
 
 const saveItems = function saveAllGeneratedItems () {
-  return new Promise.all(items.map(function(item) {
-    return db.addNewItem({name: item});
+  return Promise.all(items.map(function(item) {
+    return Items.addNewItem({name: item});
   }));
 };
 
 const saveReviews = function saveAllGeneratedReviews () {
-  return new Promise.all(reviews.map(function(review) {
-    return db.addNewReview(review);
+  return Promise.all(reviews.map(function(review) {
+    return Reviews.addNewReview(review);
   }));
 };
 
@@ -74,6 +76,6 @@ saveUsers()
 .then(function() {
   // close db
 })
-.catch(function() {
+.catch(function(error) {
   return console.error(error);
 });
