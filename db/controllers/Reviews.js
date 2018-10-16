@@ -30,17 +30,17 @@ const addNewReviewByIDs = function insertNewReviewUsingIDs (review) {
   return Review.create(review);
 };
 
-const getAllReviews = function retrieveAllReviews() {
-  return Review.findAll();
+const getReviewsForItemID = function retrieveTenOffsetReviewsForItemID(query, offset) {
+  return Review.findAll({ where: {item_id: query}, offset: offset, limit: 10, include: [{ model: User, attributes: ['username'] }] });
 };
 
-const getReviewsForItemId = function retrieveReviewsByItemId(query) {
+const getAllReviewsForItemID = function retrieveAllReviewsForItemID(query) {
   return Review.findAll({ where: {item_id: query}, include: [{ model: User, attributes: ['username'] }] });
 };
 
 module.exports = {
   addNewReview: addNewReview,
   addNewReviewByIDs: addNewReviewByIDs,
-  getAllReviews: getAllReviews,
-  getReviewsForItemId: getReviewsForItemId,
+  getReviewsForItemID: getReviewsForItemID,
+  getAllReviewsForItemID: getAllReviewsForItemID,
 };
