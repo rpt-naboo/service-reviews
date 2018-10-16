@@ -11,8 +11,7 @@ const db = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.e
   operatorsAliases: false,
 });
 
-Sequelize
-  .authenticate()
+db.authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');
   })
@@ -21,14 +20,29 @@ Sequelize
   });
 
 const User = db.define('User', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   username: Sequelize.STRING(20),
 });
 
 const Item = db.define('Item', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   name: Sequelize.STRING(50),
 });
 
 const Review = db.define('Review', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true
+  },
   stars: Sequelize.INTEGER,
   text: Sequelize.TEXT,
 });
