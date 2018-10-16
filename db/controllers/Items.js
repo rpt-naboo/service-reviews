@@ -9,7 +9,7 @@ const getAllItems = function retrieveAllItems() {
   return Item.findAll();
 };
 
-module.exports.Items = {
+module.exports = {
   addNewItem: addNewItem,
   getAllItems: getAllItems,
 };

@@ -30,7 +30,7 @@ const getAllReviews = function retrieveAllReviews() {
   return Review.findAll();
 };
 
-module.exports.Reviews = {
+module.exports = {
   addNewReview: addNewReview,
   getAllReviews: getAllReviews,
 };
