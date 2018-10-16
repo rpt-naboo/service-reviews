@@ -55,7 +55,7 @@ User.sync();
 Item.sync();
 Review.sync();
 
-module.exports.Models = {
+module.exports = {
   User: User,
   Item: Item,
   Review: Review,
