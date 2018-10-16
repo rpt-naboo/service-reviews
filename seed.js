@@ -43,14 +43,14 @@ const generateReviews = function generateNRandomReviews (n) {
 };
 
 const saveUsers = function saveAllGeneratedUsers () {
-  return new Promise.all(users.map(function(user) {
-    return db.addNewUser(user);
+  return new Promise.all(usernames.map(function(name) {
+    return db.addNewUser({username: name});
   }));
 };
 
 const saveItems = function saveAllGeneratedItems () {
   return new Promise.all(items.map(function(item) {
-    return db.addNewItem(item);
+    return db.addNewItem({name: item});
   }));
 };
 
