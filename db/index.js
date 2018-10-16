@@ -11,6 +11,15 @@ const db = new Sequelize(process.env.DB_DATABASE, process.env.DB_USER, process.e
   operatorsAliases: false,
 });
 
+Sequelize
+  .authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
+
 const User = db.define('User', {
   username: Sequelize.STRING(20),
 });
