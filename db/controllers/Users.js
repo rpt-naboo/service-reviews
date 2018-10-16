@@ -1,12 +1,14 @@
 const Models = require('../Models.js');
 const User = Models.User;
 
-const addNewUser = function insertNewUser () {
-  // FILL ME IN
+console.log(Models, User);
+
+const addNewUser = function insertNewUser (user) {
+  return User.create(user);
 };
 
 const getAllUsers = function retrieveAllUsers() {
-  // FILL ME IN
+  return User.findAll();
 };
 
 module.exports.Users = {

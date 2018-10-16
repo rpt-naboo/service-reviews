@@ -1,12 +1,12 @@
 const Models = require('../Models.js');
 const Item = Models.Item;
 
-const addNewItem = function insertNewItem () {
-  // FILL ME IN
+const addNewItem = function insertNewItem (item) {
+  return Item.create(item);
 };
 
 const getAllItems = function retrieveAllItems() {
-  // FILL ME IN
+  return Item.findAll();
 };
 
 module.exports.Items = {
