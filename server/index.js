@@ -14,16 +14,21 @@ app.use(express.static(path.join(__dirname, '/../client')));
 app.post('/api/search', jsonParser, function (req, res) {
   const query = req.body.query;
   Items.getItemId(query).then((id) => {
-    Reviews.getReviewsForItemId(id).then((reviews) => {
+    Reviews.getAllReviewsForItemID(id).then((reviews) => {
       res.send(reviews);
     });
   });
 })
 
-// Get reviews for item with ID itemID.
-app.get('/api/items/:itemID', function (req, res) {
+// Get a page of reviews for item with ID itemID.
+// page is an integer. One page is 10 reviews.
+app.get('/api/items/:itemID/:page', function (req, res) {
   const query = req.params.itemID;
-  Reviews.getReviewsForItemId(query).then((reviews) => {
+  let offset = Math.floor(req.params.page * 10) - 10;
+  if (offset < 0) {
+    offset = 0;
+  }
+  Reviews.getReviewsForItemID(query, offset).then((reviews) => {
     res.send(reviews);
   });
 })
