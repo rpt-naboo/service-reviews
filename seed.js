@@ -38,7 +38,7 @@ const generateReviews = function generateNRandomReviews (n) {
       stars: Math.floor(Math.random() * (6)),
       text: faker.lorem.sentences(),
       user: chooseRandom(usernames),
-      item: chooseRandom(items),
+      item: chooseRandom(items.slice(0, 9)), //ensures that item 10 will have zero reviews
     };
     reviews.push(randomReview);
   }
