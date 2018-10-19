@@ -16,5 +16,5 @@ const getItemID = function findItemIdForName (query) {
 module.exports = {
   addNewItem: addNewItem,
   getAllItems: getAllItems,
-  getItemId: getItemId,
+  getItemID: getItemID,
 };
