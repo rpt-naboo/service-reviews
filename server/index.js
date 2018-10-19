@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, '/../client')));
 // Requires data shape: {query: 'ITEM_NAME'}, where ITEM_NAME is an exact match.
 app.post('/api/search', jsonParser, function (req, res) {
   const query = req.body.query;
-  Items.getItemId(query).then((id) => {
+  Items.getItemID(query).then((id) => {
     Reviews.getAllReviewsForItemID(id).then((reviews) => {
       res.send(reviews);
     });

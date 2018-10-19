@@ -9,7 +9,7 @@ const getAllItems = function retrieveAllItems() {
   return Item.findAll();
 };
 
-const getItemId = function findItemIdForName (query) {
+const getItemID = function findItemIdForName (query) {
   return Item.find({ where: {name: query}, attributes: ['id'] }).then((result) => { return result.id });
 };
 
