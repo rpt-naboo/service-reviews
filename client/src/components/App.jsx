@@ -2,6 +2,7 @@ import React from 'react';
 
 import Page from './Page.jsx';
 import PageButtons from './PageButtons.jsx';
+import SubmissionForm from './SubmissionForm.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -29,7 +30,8 @@ class App extends React.Component {
     return (
       <div>
         <Page page={this.state.page} itemID={this.state.itemID} />
-        <PageButtons incrementPage={this.incrementPage} decrementPage={this.decrementPage}/>
+        <PageButtons incrementPage={this.incrementPage} decrementPage={this.decrementPage} />
+        <SubmissionForm itemID={this.state.itemID} userID={this.state.userID} />
       </div>
     );
   }
