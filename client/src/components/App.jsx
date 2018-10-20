@@ -7,6 +7,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      userID: props.userID,
       itemID: props.itemID,
       page: 1,
     };
