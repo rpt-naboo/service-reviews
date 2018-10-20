@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 import Review from './Review.jsx';
 
@@ -6,18 +7,41 @@ class Page extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: [
-      { User: {username: 'Tito61'}, createdAt: "2018-10-19T00:09:42.000Z", id: 1, item_id: 1, stars: 4, text: "Et et omnis odit maiores eaque iusto. Amet non non. Ipsam laborum maiores et ut ut nemo est aliquam.", updatedAt: "2018-10-19T00:09:42.000Z", user_id: 3 },
-      { User: {username: 'Tito61'}, createdAt: "2018-10-19T00:09:42.000Z", id: 2, item_id: 1, stars: 4, text: "Et et omnis odit maiores eaque iusto. Amet non non. Ipsam laborum maiores et ut ut nemo est aliquam.", updatedAt: "2018-10-19T00:09:42.000Z", user_id: 3 }],
+      reviews: [],
     }
   }
 
   componentDidMount() {
-    // get reviews for item page
+    $.ajax({
+      url: `http://localhost:3000/api/items/${this.props.itemID}/${this.props.page}`,
+      method: 'GET',
+      dataType: 'JSON',
+      success: (data) => {
+        console.log('componentDidMount');
+        console.log(data);
+        this.setState({ reviews: data });
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 
-  componentDidUpdate() {
-    // get reviews for item page
+  componentDidUpdate(previousProps) {
+    if (previousProps.page !== this.props.page) {
+      $.ajax({
+        url: `http://localhost:3000/api/items/${this.props.itemID}/${this.props.page}`,
+        method: 'GET',
+        dataType: 'JSON',
+        success: (data) => {
+          console.log('componentDidUpdate');
+          this.setState({ reviews: data });
+        },
+        error: (err) => {
+          console.error(err);
+        },
+      });
+    }
   }
 
   render() {
