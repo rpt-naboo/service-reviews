@@ -13,12 +13,10 @@ class Page extends React.Component {
 
   componentDidMount() {
     $.ajax({
-      url: `http://localhost:3000/api/items/${this.props.itemID}/${this.props.page}`,
+      url: `/api/items/${this.props.itemID}/${this.props.page}`,
       method: 'GET',
       dataType: 'JSON',
       success: (data) => {
-        console.log('componentDidMount');
-        console.log(data);
         this.setState({ reviews: data });
       },
       error: (err) => {
@@ -30,11 +28,10 @@ class Page extends React.Component {
   componentDidUpdate(previousProps) {
     if (previousProps.page !== this.props.page) {
       $.ajax({
-        url: `http://localhost:3000/api/items/${this.props.itemID}/${this.props.page}`,
+        url: `/api/items/${this.props.itemID}/${this.props.page}`,
         method: 'GET',
         dataType: 'JSON',
         success: (data) => {
-          console.log('componentDidUpdate');
           this.setState({ reviews: data });
         },
         error: (err) => {
