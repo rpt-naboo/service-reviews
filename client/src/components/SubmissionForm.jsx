@@ -11,7 +11,7 @@ class SubmissionForm extends React.Component {
   submit() {
     const review = this.formatData();
     $.ajax({
-      url: `http://localhost:3000/api/items/${this.props.itemID}`,
+      url: `/api/items/${this.props.itemID}`,
       method: 'POST',
       data: JSON.stringify(review),
       contentType: 'application/json',
