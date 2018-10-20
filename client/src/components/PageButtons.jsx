@@ -1,5 +1,7 @@
 import React from 'react';
 
-// FILL ME IN
+function PageButtons(props) {
+  return <div><button /><button /></div>;
+}
 
 export default PageButtons;
