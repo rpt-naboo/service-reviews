@@ -1,5 +1,9 @@
 import React from 'react';
 
-// FILL ME IN
+function Stars(props) {
+  return (
+    <div>{props.stars}/5 Stars</div>
+  );
+}
 
 export default Stars;

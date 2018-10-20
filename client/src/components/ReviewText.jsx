@@ -1,5 +1,9 @@
 import React from 'react';
 
-// FILL ME IN
+function ReviewText(props) {
+  return (
+    <div>{props.text}</div>
+  );
+}
 
 export default ReviewText;

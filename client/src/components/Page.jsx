@@ -6,7 +6,9 @@ class Page extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: [{id: 0}, {id: 1}, {id: 2}],
+      reviews: [
+      { User: {username: 'Tito61'}, createdAt: "2018-10-19T00:09:42.000Z", id: 1, item_id: 1, stars: 4, text: "Et et omnis odit maiores eaque iusto. Amet non non. Ipsam laborum maiores et ut ut nemo est aliquam.", updatedAt: "2018-10-19T00:09:42.000Z", user_id: 3 },
+      { User: {username: 'Tito61'}, createdAt: "2018-10-19T00:09:42.000Z", id: 2, item_id: 1, stars: 4, text: "Et et omnis odit maiores eaque iusto. Amet non non. Ipsam laborum maiores et ut ut nemo est aliquam.", updatedAt: "2018-10-19T00:09:42.000Z", user_id: 3 }],
     }
   }
 
