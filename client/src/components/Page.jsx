@@ -17,8 +17,6 @@ class Page extends React.Component {
       method: 'GET',
       dataType: 'JSON',
       success: (data) => {
-        console.log('componentDidMount');
-        console.log(data);
         this.setState({ reviews: data });
       },
       error: (err) => {
@@ -34,7 +32,6 @@ class Page extends React.Component {
         method: 'GET',
         dataType: 'JSON',
         success: (data) => {
-          console.log('componentDidUpdate');
           this.setState({ reviews: data });
         },
         error: (err) => {
