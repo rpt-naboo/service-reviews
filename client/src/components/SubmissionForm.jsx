@@ -4,8 +4,13 @@ import $ from 'jquery';
 class SubmissionForm extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      stars: 0,
+      text: '',
+    };
     this.submit = this.submit.bind(this);
     this.formatData = this.formatData.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   submit() {
@@ -26,7 +31,7 @@ class SubmissionForm extends React.Component {
   }
 
   formatData() {
-    let stars = Math.floor($('#new-review-stars').val());
+    let stars = Math.floor(this.state.stars);
     if (stars > 5) {
       stars = 5;
     }
@@ -37,17 +42,23 @@ class SubmissionForm extends React.Component {
     const review = {
       user_id: this.props.userID,
       stars: stars,
-      text: $('#new-review-text').val(),
+      text: this.state.text,
     };
 
     return review;
   }
 
+  handleChange(event) {
+    const key = event.target.name;
+    const value = event.target.value;
+    this.setState({ [key]: value });
+  }
+
   render() {
     return (
       <div>
-        <div>Stars: <input type="number" id="new-review-stars"></input></div>
-        <div>Review: <textarea id="new-review-text"></textarea></div>
+        <div>Stars: <input name="stars" type="number" onChange={this.handleChange}></input></div>
+        <div>Review: <textarea name="text" onChange={this.handleChange}></textarea></div>
         <button onClick={this.submit}>Submit</button>
       </div>
     );
