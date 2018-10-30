@@ -34,13 +34,8 @@ const getReviewsForItemID = function retrieveTenOffsetReviewsForItemID(query, of
   return Review.findAll({ where: {item_id: query}, offset: offset, limit: 10, include: [{ model: User, attributes: ['username'] }] });
 };
 
-const getAllReviewsForItemID = function retrieveAllReviewsForItemID(query) {
-  return Review.findAll({ where: {item_id: query}, include: [{ model: User, attributes: ['username'] }] });
-};
-
 module.exports = {
   addNewReview: addNewReview,
   addNewReviewByIDs: addNewReviewByIDs,
   getReviewsForItemID: getReviewsForItemID,
-  getAllReviewsForItemID: getAllReviewsForItemID,
 };

@@ -2,23 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const Reviews = require('../db/controllers/Reviews.js');
-const Items = require('../db/controllers/Items.js');
 
 const app = express();
 const jsonParser = bodyParser.json();
 
 app.use(express.static(path.join(__dirname, '/../client')));
-
-// Get an item's reviews by its name.
-// Requires data shape: {query: 'ITEM_NAME'}, where ITEM_NAME is an exact match.
-app.post('/api/search', jsonParser, function (req, res) {
-  const query = req.body.query;
-  Items.getItemID(query).then((id) => {
-    Reviews.getAllReviewsForItemID(id).then((reviews) => {
-      res.send(reviews);
-    });
-  });
-})
 
 // Get a page of reviews for item with ID itemID.
 // page is an integer. One page is 10 reviews.
