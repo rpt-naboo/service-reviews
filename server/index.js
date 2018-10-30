@@ -10,6 +10,7 @@ app.use(express.static(path.join(__dirname, '/../client')));
 
 // Get average stars and total reviews
 // result format: {totalReviews: INT, averageScore: number with two decimal places}
+// if item has no reviews, returns 0 and null respectively
 app.get('/api/items/:itemID/stats', function (req, res) {
   const query = req.params.itemID;
   Reviews.getReviewsData(query).then((data) => {
