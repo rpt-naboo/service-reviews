@@ -8,6 +8,11 @@ const jsonParser = bodyParser.json();
 
 app.use(express.static(path.join(__dirname, '/../client')));
 
+// Get average stars and total reviews
+app.get('/api/items/:itemID/info', function (req, res) {
+  // FILL ME IN
+})
+
 // Get a page of reviews for item with ID itemID.
 // page is an integer. One page is 10 reviews.
 app.get('/api/items/:itemID/:page', function (req, res) {
