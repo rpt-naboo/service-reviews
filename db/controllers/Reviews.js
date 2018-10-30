@@ -34,8 +34,23 @@ const getReviewsForItemID = function retrieveTenOffsetReviewsForItemID(query, of
   return Review.findAll({ where: {item_id: query}, offset: offset, limit: 10, include: [{ model: User, attributes: ['username'] }] });
 };
 
+const getReviewsData = function retrieveAverageScoreAndTotalReviews (query) {
+  return Review.findAll({ where: {item_id: query} }).then((results) => {
+    const totalStars = results.reduce((sum, review) => {
+      return sum + review.stars;
+    }, 0);
+    const averageScore = Number((totalStars / results.length).toFixed(2));
+    const data = {
+      totalReviews: results.length,
+      averageScore: averageScore,
+    };
+    return data;
+  });
+};
+
 module.exports = {
   addNewReview: addNewReview,
   addNewReviewByIDs: addNewReviewByIDs,
   getReviewsForItemID: getReviewsForItemID,
+  getReviewsData: getReviewsData,
 };
