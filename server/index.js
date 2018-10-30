@@ -9,8 +9,12 @@ const jsonParser = bodyParser.json();
 app.use(express.static(path.join(__dirname, '/../client')));
 
 // Get average stars and total reviews
-app.get('/api/items/:itemID/info', function (req, res) {
-  // FILL ME IN
+// result format: {totalReviews: INT, averageScore: number with two decimal places}
+app.get('/api/items/:itemID/stats', function (req, res) {
+  const query = req.params.itemID;
+  Reviews.getReviewsData(query).then((data) => {
+    res.send(data);
+  });
 })
 
 // Get a page of reviews for item with ID itemID.
