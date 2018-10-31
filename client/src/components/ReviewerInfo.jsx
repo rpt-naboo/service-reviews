@@ -1,8 +1,13 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const ReviewerWrapper = styled.div`
+  font-style: italic;
+`;
 
 function ReviewerInfo(props) {
   return (
-    <div>{props.username}</div>
+    <ReviewerWrapper>{props.username}</ReviewerWrapper>
   );
 }
 
