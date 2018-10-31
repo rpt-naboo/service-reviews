@@ -1,7 +1,12 @@
 import React from 'react';
 import $ from 'jquery';
+import styled from 'styled-components';
 
 import Review from './Review.jsx';
+
+const ReviewList = styled.ul`
+  list-style-type: none;
+`;
 
 class Page extends React.Component {
   constructor(props) {
@@ -47,9 +52,9 @@ class Page extends React.Component {
     );
     return (
       <div>
-        <ul>
+        <ReviewList>
           {reviews}
-        </ul>
+        </ReviewList>
         Page {this.props.page}
       </div>
     );
