@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ReviewerWrapper = styled.li`
+const ReviewerWrapper = styled.div`
   font-style: italic;
 `;
 
