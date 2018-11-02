@@ -1,12 +1,12 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const Reviews = require('../db/controllers/Reviews.js');
+const Reviews = require('../../db/controllers/Reviews.js');
 
 const app = express();
 const jsonParser = bodyParser.json();
 
-app.use(express.static(path.join(__dirname, '/../client')));
+app.use(express.static(path.join(__dirname, '/../../client')));
 
 // Get average stars and total reviews
 // result format: {totalReviews: INT, averageScore: number with two decimal places}
