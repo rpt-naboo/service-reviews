@@ -6,6 +6,8 @@ const Reviews = require('../../db/controllers/Reviews.js');
 const app = express();
 const jsonParser = bodyParser.json();
 
+// Disabled for production
+// Client files will be served over proxy instead: this is just for testing.
 //app.use(express.static(path.join(__dirname, '/../../client')));
 
 // Get average stars and total reviews
