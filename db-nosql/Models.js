@@ -23,13 +23,11 @@ const reviewSchema = new Schema({
 
 const itemSchema = new Schema({
   name: String,
-  reviewCount: Number,
-  averageStars: Number,
+  totalStars: Number,
   reviews: [reviewSchema],
 });
 
 userSchema.plugin(MongooseAutoIncrementID.plugin, { modelName: 'User' });
-reviewSchema.plugin(MongooseAutoIncrementID.plugin, { modelName: 'Review' });
 itemSchema.plugin(MongooseAutoIncrementID.plugin, { modelName: 'Item' });
 
 const User = mongoose.model('User', userSchema);

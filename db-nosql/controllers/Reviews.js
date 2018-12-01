@@ -3,32 +3,29 @@ const { Review, Item } = Models;
 
 const addNewReviewByIDs = function insertNewReviewUsingIDs (review) {
   const itemID = review.item_id;
-  return Item.findOne({ _id: itemID }).exec()
-    .then((item) => {
-      item.reviews.push(review);
-
-      item.reviewCount = item.reviews.length;
-
-      const totalStars = item.reviews.reduce((acc, review) => {
-        return acc + review.stars;
-      }, 0);
-      const averageScore = Number((totalStars / item.reviewCount).toFixed(2));
-      item.averageStars = averageScore;
-
-      return item.save();
-    });
+  return Item.findByIdAndUpdate(itemID, { $inc: {totalStars: review.stars}, $push: {reviews: review} }).exec();
 };
 
 const getReviewsForItemID = function retrieveTenOffsetReviewsForItemID(itemID, offset) {
-  return Item.findById(itemID).exec()
+  return Item.findById(itemID).populate('reviews.user_id').exec()
     .then((item) => {
       const page = item.reviews.slice(offset, offset + 10);
       return page;
     });
 };
 
+//getReviewsForItemID(1, 0).then((results) => { console.log(results) });
+
 const getReviewsData = function retrieveAverageScoreAndTotalReviews (itemID) {
-  return Item.findOne({ _id: itemID }).select('-_id reviewCount averageStars').lean(true).exec();
+  return Item.findById(itemID).exec()
+    .then((item) => {
+      const averageScore = Number((item.totalStars / item.reviews.length).toFixed(2));
+      const data = {
+        totalReviews: item.reviews.length,
+        averageScore: averageScore,
+      };
+      return data;
+    });
 };
 
 module.exports = {
