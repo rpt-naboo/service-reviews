@@ -1,14 +1,24 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-const Reviews = require('../../db/controllers/Reviews.js');
+
+let Reviews = null;
+
+if (process.env.DB_TYPE === 'mysql') {
+  Reviews = require('../../db/controllers/Reviews.js');
+} else if (process.env.DB_TYPE === 'mongo') {
+  Reviews = require('../../db-nosql/controllers/Reviews.js');
+} else {
+  return console.error('Database type not specified.');
+}
 
 const app = express();
 const jsonParser = bodyParser.json();
 
 // Disabled for production
 // Client files will be served over proxy instead: this is just for testing.
-//app.use(express.static(path.join(__dirname, '/../../client')));
+app.use(express.static(path.join(__dirname, '/../../client')));
 
 // Get average stars and total reviews
 // result format: {totalReviews: INT, averageScore: number with two decimal places}
