@@ -14,8 +14,6 @@ const getReviewsForItemID = function retrieveTenOffsetReviewsForItemID(itemID, o
     });
 };
 
-//getReviewsForItemID(1, 0).then((results) => { console.log(results) });
-
 const getReviewsData = function retrieveAverageScoreAndTotalReviews (itemID) {
   return Item.findById(itemID).exec()
     .then((item) => {
