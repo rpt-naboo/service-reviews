@@ -48,7 +48,7 @@ class Page extends React.Component {
 
   render() {
     const reviews = this.state.reviews.map((review) =>
-      <Review key={review.id} review={review}/>
+      <Review key={review.id || review._id} review={review}/>
     );
     return (
       <div>

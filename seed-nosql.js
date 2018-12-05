@@ -1,15 +1,14 @@
 const faker = require('faker');
-const Users = require('./db/controllers/Users.js');
-const Items = require('./db/controllers/Items.js');
-const Reviews = require('./db/controllers/Reviews.js');
+const Users = require('./db-nosql/controllers/Users.js');
+const Items = require('./db-nosql/controllers/Items.js');
+const Reviews = require('./db-nosql/controllers/Reviews.js');
 
 const usernames = [];
 const items = [];
 const reviews = [];
 
-const chooseRandom = function chooseRandomEntryFromArray (collection) {
-  let index = Math.floor(Math.random() * collection.length);
-  return collection[index];
+const chooseRandom = function chooseOneToMaxExclusive (max) {
+  return Math.floor(Math.random() * (max - 1)) + 1;;
 };
 
 const generateUsers = function generateNRandomUsernames (n) {
@@ -37,8 +36,8 @@ const generateReviews = function generateNRandomReviews (n) {
     let randomReview = {
       stars: Math.floor(Math.random() * (6)),
       text: faker.lorem.sentences(),
-      user: chooseRandom(usernames),
-      item: chooseRandom(items.slice(0, 9)), //ensures that item 10 will have zero reviews
+      user_id: chooseRandom(11),
+      item_id: chooseRandom(10), //ensures that item 10 will have zero reviews
     };
     reviews.push(randomReview);
   }
@@ -58,7 +57,7 @@ const saveItems = function saveAllGeneratedItems () {
 
 const saveReviews = function saveAllGeneratedReviews () {
   return Promise.all(reviews.map(function(review) {
-    return Reviews.addNewReview(review);
+    return Reviews.addNewReviewByIDs(review);
   }));
 };
 

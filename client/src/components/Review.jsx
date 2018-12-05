@@ -10,10 +10,11 @@ const ReviewWrapper = styled.li`
 `;
 
 function Review(props) {
+  const user = props.review.User || props.review.user_id; // MySQL sends User, Mongo sends user_id.
   return (
     <ReviewWrapper>
       <Stars stars={props.review.stars}/>
-      <ReviewerInfo username={props.review.User.username}/>
+      <ReviewerInfo username={user.username}/>
       <ReviewText text={props.review.text}/>
     </ReviewWrapper>
   );
