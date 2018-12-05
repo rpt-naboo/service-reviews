@@ -7,11 +7,11 @@ var morgan  = require('morgan');
 let Reviews = null;
 
 if (process.env.DB_TYPE === 'mysql') {
-  Reviews = require('../../db/controllers/Reviews.js');
+  Reviews = require('../../db-mysql/controllers/Reviews.js');
 } else if (process.env.DB_TYPE === 'mongo') {
   Reviews = require('../../db-nosql/controllers/Reviews.js');
 } else {
-  return console.error('Database type not specified.');
+  throw new Error('Database type not specified: set either \'mongo\' or \'mysql\' in .env.');
 }
 
 const app = express();

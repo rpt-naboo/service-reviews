@@ -1,7 +1,7 @@
 const faker = require('faker');
-const Users = require('./db/controllers/Users.js');
-const Items = require('./db/controllers/Items.js');
-const Reviews = require('./db/controllers/Reviews.js');
+const Users = require('./db-mysql/controllers/Users.js');
+const Items = require('./db-mysql/controllers/Items.js');
+const Reviews = require('./db-mysql/controllers/Reviews.js');
 
 const usernames = [];
 const items = [];
