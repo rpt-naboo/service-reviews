@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
+var morgan  = require('morgan');
 
 let Reviews = null;
 
@@ -19,6 +20,9 @@ const jsonParser = bodyParser.json();
 // Disabled for production
 // Client files will be served over proxy instead: this is just for testing.
 app.use(express.static(path.join(__dirname, '/../../client')));
+
+// logging
+app.use(morgan('dev'));
 
 // Get average stars and total reviews
 // result format: {totalReviews: INT, averageScore: number with two decimal places}
