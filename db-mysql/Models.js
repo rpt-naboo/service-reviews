@@ -4,14 +4,14 @@ require('dotenv').config();
 //import dotenv from 'dotenv';
 
 //dotenv.config();
-const db = new Sequelize(process.env.MYSQL_DATABASE, process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, {
+const instance = new Sequelize(process.env.MYSQL_DATABASE, process.env.MYSQL_USER, process.env.MYSQL_PASSWORD, {
   host: process.env.MYSQL_HOST,
   port: process.env.MYSQL_PORT,
   dialect: 'mysql',
   operatorsAliases: false,
 });
 
-db.authenticate()
+const authenticate = instance.authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');
   })
@@ -19,7 +19,7 @@ db.authenticate()
     console.error('Unable to connect to the database:', err);
   });
 
-const User = db.define('User', {
+const User = instance.define('User', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -28,7 +28,7 @@ const User = db.define('User', {
   username: Sequelize.STRING(20),
 });
 
-const Item = db.define('Item', {
+const Item = instance.define('Item', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -37,7 +37,7 @@ const Item = db.define('Item', {
   name: Sequelize.STRING(50),
 });
 
-const Review = db.define('Review', {
+const Review = instance.define('Review', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -56,6 +56,8 @@ Item.sync();
 Review.sync();
 
 module.exports = {
+  instance: instance,
+  authenticate: authenticate,
   User: User,
   Item: Item,
   Review: Review,
