@@ -1,15 +1,12 @@
 const faker = require('faker');
-const { instance, authenticate } = require('./db-mysql/Models.js');
-const Users = require('./db-mysql/controllers/Users.js');
-const Items = require('./db-mysql/controllers/Items.js');
-const Reviews = require('./db-mysql/controllers/Reviews.js');
+const db = require('./db-mysql/Models.js');
 const Promise = require('bluebird');
 
 /* -------------------------------------------------- */
 // Edit these values to adjust the number of records generated.
 // Increment is used when generating large numbers of records, to avoid going out of memory --
 // it specifies how many records are generated at a time, rather than all at once.
-const increment    = 100;
+const increment    = 1000;
 const totalUsers   = 1000000;
 const totalItems   = 100000;
 const totalReviews = 10000000;
@@ -20,15 +17,15 @@ const chooseRandom = function chooseOneToMaxInclusive (max) {
 };
 
 const generateUsers = function generateNRandomUsernames (n) {
-  const usernames = [];
+  const users = [];
   for (let i = 0; i < n; i++) {
     let randomName = faker.internet.userName();
     while (randomName.length > 20) {
       randomName = faker.internet.userName();
     }
-    usernames.push(randomName);
+    users.push({username: randomName});
   }
-  return usernames;
+  return users;
 };
 
 const generateItems = function generateNRandomProductNames (n) {
@@ -38,7 +35,7 @@ const generateItems = function generateNRandomProductNames (n) {
     while (randomName.length > 50) {
       randomName = faker.commerce.productName();
     }
-    items.push(randomName);
+    items.push({name: randomName});
   }
   return items;
 };
@@ -58,31 +55,25 @@ const generateReviews = function generateNRandomReviews (n) {
 };
 
 const saveIncrementOfUsers = function saveAllGeneratedUsers () {
-  const usernames = generateUsers(increment);
-  return Promise.all(usernames.map(function(name) {
-    return Users.addNewUser({username: name});
-  }));
+  const users = generateUsers(increment);
+  return db.User.bulkCreate(users);
 };
 
 const saveIncrementOfItems = function saveAllGeneratedItems () {
   const items = generateItems(increment);
-  return Promise.all(items.map(function(item) {
-    return Items.addNewItem({name: item});
-  }));
+  return db.Item.bulkCreate(items);
 };
 
 const saveIncrementOfReviews = function saveAllGeneratedReviews () {
   const reviews = generateReviews(increment);
-  return Promise.all(reviews.map(function(review) {
-    return Reviews.addNewReviewByIDs(review);
-  }));
+  return db.Review.bulkCreate(reviews);
 };
 
 const userIncrements = Math.floor(totalUsers / increment);
 const itemIncrements = Math.floor(totalItems / increment);
 const reviewIncrements = Math.floor(totalReviews / increment);
 
-authenticate
+db.authenticate
 .then(function() {
   let p = Promise.resolve();
   for (let i = 0; i < userIncrements; i++) {
@@ -105,7 +96,7 @@ authenticate
   return p;
 })
 .then(function() {
-  return instance.close();
+  return db.instance.close();
 })
 .catch(function(error) {
   return console.error(error);
