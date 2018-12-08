@@ -6,8 +6,8 @@ const Reviews = require('./db-mysql/controllers/Reviews.js');
 
 /* -------------------------------------------------- */
 // Edit these values to adjust the number of records generated.
-const totalUsers = 10;
-const totalItems = 10;
+const totalUsers   = 10;
+const totalItems   = 10;
 const totalReviews = 100;
 /* -------------------------------------------------- */
 
