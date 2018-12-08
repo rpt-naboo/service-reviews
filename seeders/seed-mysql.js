@@ -1,5 +1,5 @@
 const faker = require('faker');
-const db = require('./db-mysql/Models.js');
+const db = require('../db-mysql/Models.js');
 const Promise = require('bluebird');
 
 /* -------------------------------------------------- */

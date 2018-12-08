@@ -1,7 +1,7 @@
 const faker = require('faker');
-const Users = require('./db-nosql/controllers/Users.js');
-const Items = require('./db-nosql/controllers/Items.js');
-const Reviews = require('./db-nosql/controllers/Reviews.js');
+const Users = require('../db-nosql/controllers/Users.js');
+const Items = require('../db-nosql/controllers/Items.js');
+const Reviews = require('../db-nosql/controllers/Reviews.js');
 
 const usernames = [];
 const items = [];
