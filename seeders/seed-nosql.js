@@ -1,11 +1,10 @@
 const faker = require('faker');
-const { instance, authenticate } = require('./db-mysql/Models.js');
-const Users = require('./db-mysql/controllers/Users.js');
-const Items = require('./db-mysql/controllers/Items.js');
-const Reviews = require('./db-mysql/controllers/Reviews.js');
+const Users = require('../db-nosql/controllers/Users.js');
+const Items = require('../db-nosql/controllers/Items.js');
+const Reviews = require('../db-nosql/controllers/Reviews.js');
 
 /* -------------------------------------------------- */
-// Edit these values to adjust the number of records generated.
+// Edit these values to adjust the number of records generated
 const totalUsers   = 10;
 const totalItems   = 10;
 const totalReviews = 100;
@@ -15,8 +14,8 @@ const usernames = [];
 const items = [];
 const reviews = [];
 
-const chooseRandom = function chooseOneToMaxInclusive (max) {
-  return Math.floor(Math.random() * max) + 1;
+const chooseRandom = function chooseOneToMaxExclusive (max) {
+  return Math.floor(Math.random() * (max - 1)) + 1;;
 };
 
 const generateUsers = function generateNRandomUsernames (n) {
@@ -44,8 +43,8 @@ const generateReviews = function generateNRandomReviews (n) {
     let randomReview = {
       stars: Math.floor(Math.random() * (6)),
       text: faker.lorem.sentences(),
-      user_id: chooseRandom(totalUsers),
-      item_id: chooseRandom(totalItems - 1), //ensures that the last item will have zero reviews
+      user_id: chooseRandom(11),
+      item_id: chooseRandom(10), //ensures that item 10 will have zero reviews
     };
     reviews.push(randomReview);
   }
@@ -73,10 +72,7 @@ generateUsers(totalUsers);
 generateItems(totalItems);
 generateReviews(totalReviews);
 
-authenticate
-.then(function() {
-  return saveUsers();
-})
+saveUsers()
 .then(function() {
   return saveItems();
 })
@@ -84,7 +80,7 @@ authenticate
   return saveReviews();
 })
 .then(function() {
-  return instance.close();
+  // close db
 })
 .catch(function(error) {
   return console.error(error);
