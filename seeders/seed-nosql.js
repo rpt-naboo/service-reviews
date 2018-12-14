@@ -3,6 +3,13 @@ const Users = require('../db-nosql/controllers/Users.js');
 const Items = require('../db-nosql/controllers/Items.js');
 const Reviews = require('../db-nosql/controllers/Reviews.js');
 
+/* -------------------------------------------------- */
+// Edit these values to adjust the number of records generated
+const totalUsers   = 10;
+const totalItems   = 10;
+const totalReviews = 100;
+/* -------------------------------------------------- */
+
 const usernames = [];
 const items = [];
 const reviews = [];
@@ -61,9 +68,9 @@ const saveReviews = function saveAllGeneratedReviews () {
   }));
 };
 
-generateUsers(10);
-generateItems(10);
-generateReviews(100);
+generateUsers(totalUsers);
+generateItems(totalItems);
+generateReviews(totalReviews);
 
 saveUsers()
 .then(function() {
