@@ -9,9 +9,9 @@ const reviewStream = fs.createWriteStream(path.resolve(__dirname, 'reviews-mysql
 
 /* -------------------------------------------------- */
 // Edit these values to adjust the number of records generated.
-const totalUsers   = 10;
-const totalItems   = 10;
-const totalReviews = 100;
+const totalUsers   = 10000000;
+const totalItems   = 1000;
+const totalReviews = 100000;
 /* -------------------------------------------------- */
 
 const generateUser = function generateRandomUsername () {
@@ -30,7 +30,7 @@ const generateItem = function generateRandomProductName () {
   return randomName;
 };
 
-const generateReview = function generateRandomProductName () {
+const generateReviewText = function () {
   return faker.lorem.sentences();
 };
 
@@ -43,7 +43,7 @@ const chooseRandomUser = function () {
 };
 
 const chooseRandomItem = function () {
-  return Math.floor(Math.random() * totalItems) + 1;
+  return Math.floor(Math.random() * (totalItems - 1)) + 1;
 };
 
 generate({
@@ -59,7 +59,7 @@ generate({
 .pipe(itemStream);
 
 generate({
-  columns: [chooseRandomScore, generateReview, chooseRandomUser, chooseRandomItem],
+  columns: [chooseRandomScore, generateReviewText, chooseRandomUser, chooseRandomItem],
   length: totalReviews
 })
 .pipe(reviewStream);
