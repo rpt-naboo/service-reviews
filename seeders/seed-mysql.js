@@ -6,10 +6,10 @@ const Promise = require('bluebird');
 // Edit these values to adjust the number of records generated.
 // Increment is used when generating large numbers of records, to avoid going out of memory --
 // it specifies how many records are generated at a time, rather than all at once.
-const increment    = 1000;
-const totalUsers   = 1000000;
-const totalItems   = 100000;
-const totalReviews = 10000000;
+const increment    = 10;
+const totalUsers   = 10;
+const totalItems   = 10;
+const totalReviews = 100;
 /* -------------------------------------------------- */
 
 const chooseRandom = function chooseOneToMaxInclusive (max) {
