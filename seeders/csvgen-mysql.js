@@ -9,9 +9,9 @@ const reviewStream = fs.createWriteStream(path.resolve(__dirname, 'reviews-mysql
 
 /* -------------------------------------------------- */
 // Edit these values to adjust the number of records generated.
-const totalUsers   = 10000000;
-const totalItems   = 1000;
-const totalReviews = 1000000000;
+const totalUsers   = 1000;
+const totalItems   = 100;
+const totalReviews = 1000000;
 /* -------------------------------------------------- */
 
 const generateUser = function generateRandomUsername () {
