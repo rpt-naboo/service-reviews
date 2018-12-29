@@ -35,6 +35,7 @@ const Item = instance.define('Item', {
     primaryKey: true
   },
   name: Sequelize.STRING(50),
+  total_stars: { type: Sequelize.INTEGER, defaultValue: 0 },
 });
 
 const Review = instance.define('Review', {
